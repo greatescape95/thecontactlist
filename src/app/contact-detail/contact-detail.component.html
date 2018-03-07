@@ -1,3 +1,42 @@
-<p>
-  contact-detail works!
-</p>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12" id="contact-form">
+        <a (click)="onCancelClick()">cancel</a>
+        <a (click)="onSaveClick()">save</a>
+        <div class="divider"></div>
+        <form #contactForm="ngForm" class="reply" novalidate>
+          <fieldset>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <label>full name
+                  <span>*</span>
+                </label>
+                <input class="form-control" [(ngModel)]="contact.name" #name="ngModel" id="name" name="name" type="text" required>
+                <!-- <app-show-errors [control]="name"></app-show-errors> -->
+              </div>
+              <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <label>email</label>
+                <input class="form-control" [(ngModel)]="contact.email" #email="ngModel" type="email" id="email" name="email">
+                <!-- <app-show-errors [control]="email"></app-show-errors> -->
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <label>numbers
+                  <span>*</span>
+                </label>
+                <input class="form-control" [(ngModel)]="contact.imgUrl" #phone="ngModel" id="subject" name="subject" type="text" required>
+                <!-- <app-show-errors [control]="phone"></app-show-errors> -->
+              </div>
+            </div>
+          </fieldset>
+          <div class="clearfix">
+          </div>
+        </form>
+        <button class="btn btn-normal btn-warning bottom-pad" (click)="onCancelClick()">Cancel</button>
+        <button class="btn btn-normal btn-color submit  bottom-pad" (click)="onSaveClick()" [disabled]="contactForm.invalid">Save</button>
+      </div>
+    </div>
+    <div class="divider"></div>
+  </div>
