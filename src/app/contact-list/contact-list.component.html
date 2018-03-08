@@ -1,34 +1,61 @@
-<p>
-  <a routerLink="/contacts/detail">contact detail</a>
-  <a routerLink="/contacts/add">add</a>
-</p>
 
-<div class="container">
-    <div class="row">
-      <div class="col-lg-12" id="contact-form">
-        <a (click)="onCancelClick()">cancel</a>
-        <a (click)="onSaveClick()">save</a>
+<div class="main-wrapper">
+    <div class="header-container">
 
-        <div class="divider"></div>
+      <p class="text-uppercase">logo</p>
+    </div>
 
-
+    <p>
+        <a routerLink="/contacts/add">add</a>
+      </p>
+      
+      <ul>
+        <li *ngFor="let item of tabItems; let i = index" [ngClass]="{'underline-tab': selectedTabIndex === i}" (click)="switchTabSelection(i)">
+          {{item}}
+        </li>
+      </ul>
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12" id="contact-form">
+      
+            <div class="divider"></div>
+      
+            search
+            <input [(ngModel)]="searchText" placeholder="search text goes here">
+      
             <div class="row">
-              <div 
-              class="col-lg-4 col-md-2 col-sm-1"
-              *ngFor="let contact of contacts">
-
+              <div class="col-lg-4 col-md-2 col-sm-1" *ngFor="let contact of contacts | filter : searchText" [hidden]="selectedTabIndex === 1 && !contact.isFavorite">
+      
+      
+      
+                <i class="fa" [ngClass]="{'fa-heart': contact.isFavorite, 'fa-heart-o': !contact.isFavorite}" (click)="changeFavoriteStatus(contact)"></i>
+      
+                <div (click)="openContactDetails(contact)">
+      
+      
                   <p>{{contact.name}}</p>
                   <p>{{contact.email}}</p>
                   <p>{{contact.imgUrl}}</p>
-
+      
+                </div>
+      
+                <p (click)="editContact(contact)">edit</p>
+                <p (click)="deleteContact(contact)">delete</p>
+      
               </div>
-
+      
+      
             </div>
-
-
-          <div class="clearfix">
+      
+      
+            <div class="clearfix">
+            </div>
           </div>
+        </div>
+        <div class="divider"></div>
       </div>
-    </div>
-    <div class="divider"></div>
-  </div>
+
+
+
+</div>

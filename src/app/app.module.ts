@@ -1,7 +1,13 @@
 
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {MatDialogModule} from '@angular/material/dialog';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { AngularFontAwesomeModule } from 'angular-font-awesome';
+
+import { FilterPipe} from './filter.pipe';
 
 
 import { AppComponent } from './app.component';
@@ -11,20 +17,27 @@ import { AppRoutingModule } from './/app-routing.module';
 import { StorageServiceModule} from 'angular-webstorage-service';
 import { LocalStorageService } from './local-storage.service';
 import { UtilityService} from './utility.service';
-
+import { ContactAddEditComponent } from './contact-add-edit/contact-add-edit.component';
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ContactListComponent,
-    ContactDetailComponent
+    ContactDetailComponent,
+    ContactAddEditComponent,
+    ConfirmDialogComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     StorageServiceModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule,
+    BrowserAnimationsModule
   ],
+  entryComponents: [ConfirmDialogComponent],
   providers: [
     LocalStorageService,
     UtilityService

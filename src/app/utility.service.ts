@@ -15,4 +15,8 @@ export class UtilityService {
     };
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
   }
+
+  generateFakeImageGuid = () => {
+    return 'IMG' + this.generateFakeClientGuid();
+  }
 }

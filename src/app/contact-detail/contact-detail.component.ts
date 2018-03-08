@@ -16,6 +16,7 @@ export class ContactDetailComponent implements OnInit {
 
   private isEdit: boolean;
   private contact: Models.ContactDetail;
+  private editingContactId: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,38 +25,16 @@ export class ContactDetailComponent implements OnInit {
     private localStorageService: LocalStorageService,
     private utilityService: UtilityService
   ) {
-    this.contact = {
-      id: null,
-      name: 'test',
-      imgUrl: 'test',
-      email: 'test',
-      isFavorite: true,
-      phones: [{ name: 'test', label: 'test' }]
-    };
   }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      this.isEdit = !!params['id'];
+      this.editingContactId = params['id'];
+      this.contact = this.localStorageService.getContactByKey(this.editingContactId);
     });
-
-
-    console.log(this.contact);
   }
 
-  onCancelClick = () => {
+  onBackClick = () => {
     this.location.back();
   }
-
-
-  onSaveClick = () => {
-    if (!this.isEdit) {
-      const uniqueKey = this.utilityService.generateFakeClientGuid();
-      this.contact.id = uniqueKey;
-      this.localStorageService.saveContact(uniqueKey, this.contact);
-    }
-
-    this.router.navigateByUrl('/contacts');
-  }
-
 }

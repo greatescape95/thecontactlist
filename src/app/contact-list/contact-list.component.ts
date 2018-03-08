@@ -1,5 +1,10 @@
+
+import { Router } from '@angular/router';
 import { LocalStorageService } from './../local-storage.service';
 import { Component, OnInit } from '@angular/core';
+
+import { MatDialog, MatDialogRef } from '@angular/material';
+import { ConfirmDialogComponent } from './../confirm-dialog/confirm-dialog.component';
 
 
 @Component({
@@ -11,13 +16,56 @@ import { Component, OnInit } from '@angular/core';
 export class ContactListComponent implements OnInit {
 
   private contacts: any;
+  fileNameDialogRef: MatDialogRef<ConfirmDialogComponent>;
+  searchText: string;
+  selectedTabIndex = 0;
+  tabItems: string[];
 
   constructor(
     private localStorageService: LocalStorageService,
+    private router: Router,
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
-    this.contacts = this.localStorageService.getContacts();
-    console.log('contacts', this.contacts);
+    this.initContacts();
+    this.tabItems = ["All Contacts", "My Favourites"];
   }
+
+  private initContacts = () => {
+    this.contacts = this.localStorageService.getContacts();
+  }
+
+  switchTabSelection = (index: number) => {
+    this.selectedTabIndex = index;
+  }
+
+  changeFavoriteStatus = (contact) => {
+    contact.isFavorite = !contact.isFavorite;
+    this.localStorageService.addOrUpdateContact(contact);
+  }
+
+  openContactDetails = (contact: any) => {
+    this.router.navigateByUrl(`/contacts/detail/${contact.id}`);
+  }
+
+  editContact = (contact: any) => {
+    this.router.navigateByUrl(`/contacts/detail/edit/${contact.id}`);
+  }
+
+  deleteContact = (contact: any) => {
+    this.fileNameDialogRef = this.dialog.open(ConfirmDialogComponent,
+      { hasBackdrop: false,
+      width: "250px",
+    height: "250px"});
+    this.fileNameDialogRef.updatePosition({ left: 'calc(50% - 125px)'});
+    this.fileNameDialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.localStorageService.deleteContactByKey(contact.id);
+        this.initContacts();
+      }
+    });
+  }
+
+
 }
