@@ -1,8 +1,8 @@
 <div class="main-wrapper">
-  <div class="header-container">
-    <p class="text-uppercase">Contact list</p>
+  <div class="header-container text-uppercase">
+    <p>C o n t a c t</p>
+    <p>l i s t</p>
   </div>
-
 
   <div class="tabs-container">
     <ul>
@@ -15,56 +15,49 @@
   <div class="search-container">
     <div class="search-bar">
       <form>
-          <span class="fa fa-search"></span>
+        <span class="fa fa-search"></span>
         <input class="form-control" [(ngModel)]="searchText" name="searchText" placeholder="Search contact">
       </form>
     </div>
   </div>
 
-  <p>
-    <a routerLink="/contacts/add">add</a>
-  </p>
-
   <div class="container">
     <div class="row">
-      <div class="col-lg-12" id="contact-form">
 
-        <div class="divider"></div>
-
-
-
-        <div class="row">
-          <div class="col-lg-4 col-md-2 col-sm-1" *ngFor="let contact of contacts | filter : searchText" [hidden]="selectedTabIndex === 1 && !contact.isFavorite">
-
-
-
-            <i class="fa" [ngClass]="{'fa-heart': contact.isFavorite, 'fa-heart-o': !contact.isFavorite}" (click)="changeFavoriteStatus(contact)"></i>
-
-            <div (click)="openContactDetails(contact)">
-
-
-              <p>{{contact.name}}</p>
-              <p>{{contact.email}}</p>
-              <p>{{contact.imgUrl}}</p>
-
-            </div>
-
-            <p (click)="editContact(contact)">edit</p>
-            <p (click)="deleteContact(contact)">delete</p>
-
+      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pd-0">
+        <div class="add-new-container">
+          <div class="add-new-item">
+            <i routerLink="/contacts/add" class="fa fa-plus fa-2x has-cursor"></i>
+            <a routerLink="/contacts/add">Add new</a>
           </div>
-
-
-        </div>
-
-
-        <div class="clearfix">
         </div>
       </div>
+
+      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pd-0" *ngFor="let contact of contacts | filter : searchText" [hidden]="selectedTabIndex === 1 && !contact.isFavorite">
+        <div class="contact-item-container">
+          <div class="item-icons-container">
+            <div class="align-left">
+              <i class="fa icon-custom" [ngClass]="{'fa-heart': contact.isFavorite, 'fa-heart-o': !contact.isFavorite}" (click)="changeFavoriteStatus(contact)"></i>
+              <i class="fa fa-heart vh-icon"></i>
+            </div>
+            <div class="align-right">
+              <i class="fa icon-custom fa-edit" (click)="editContact(contact)"></i>
+              <i class="fa icon-custom fa-trash" (click)="deleteContact(contact)"></i>
+            </div>
+            <div class="cb"></div>
+          </div>
+          <div (click)="openContactDetails(contact)" class="has-cursor">
+            <div class="item-image-container">
+              <img class="img-circle" [src]="getImageSrcByKey(contact.imgUrl)">
+            </div>
+            <div class="item-text-container">
+              <span class="item-text">{{contact.name}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-    <div class="divider"></div>
   </div>
-
-
 
 </div>

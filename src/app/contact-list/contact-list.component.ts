@@ -29,7 +29,7 @@ export class ContactListComponent implements OnInit {
 
   ngOnInit() {
     this.initContacts();
-    this.tabItems = ["All Contacts", "My Favourites"];
+    this.tabItems = ["All contacts", "My favorites"];
   }
 
   private initContacts = () => {
@@ -49,16 +49,22 @@ export class ContactListComponent implements OnInit {
     this.router.navigateByUrl(`/contacts/detail/${contact.id}`);
   }
 
+  getImageSrcByKey = (key: string) => {
+    return this.localStorageService.getImageByKey(key);
+  }
+
   editContact = (contact: any) => {
     this.router.navigateByUrl(`/contacts/detail/edit/${contact.id}`);
   }
 
   deleteContact = (contact: any) => {
     this.fileNameDialogRef = this.dialog.open(ConfirmDialogComponent,
-      { hasBackdrop: false,
-      width: "250px",
-    height: "250px"});
-    this.fileNameDialogRef.updatePosition({ left: 'calc(50% - 125px)'});
+      {
+        hasBackdrop: false,
+        width: '300px',
+        height: '300px'
+      });
+    this.fileNameDialogRef.updatePosition({ left: 'calc(50% - 150px)' });
     this.fileNameDialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.localStorageService.deleteContactByKey(contact.id);

@@ -16,8 +16,11 @@ export class LocalStorageService {
   }
 
   getImageByKey = (key: any) => {
-    console.log(this.storage.get(key));
-    return this.storage.get(key);
+    let imgSrc = this.storage.get(key);
+    if (!imgSrc) {
+      imgSrc = '/assets/images/profilePicture.jpg';
+    }
+    return imgSrc;
   }
 
 
