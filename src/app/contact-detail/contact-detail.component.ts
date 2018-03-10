@@ -1,4 +1,3 @@
-import { UtilityService } from './../utility.service';
 import { LocalStorageService } from './../local-storage.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -22,8 +21,7 @@ export class ContactDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private router: Router,
-    private localStorageService: LocalStorageService,
-    private utilityService: UtilityService
+    private localStorageService: LocalStorageService
   ) {
   }
 
@@ -36,5 +34,13 @@ export class ContactDetailComponent implements OnInit {
 
   onBackClick = () => {
     this.location.back();
+  }
+
+  getImageSrc = () => {
+      return this.localStorageService.getImageByKey(this.contact.imgUrl);
+  }
+
+  editContact = () => {
+    this.router.navigateByUrl(`/contacts/detail/edit/${this.contact.id}`);
   }
 }

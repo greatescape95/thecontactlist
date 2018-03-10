@@ -5,7 +5,7 @@ export class UtilityService {
 
   constructor() {
 
-   }
+  }
 
   generateFakeClientGuid = () => {
     const s4 = () => {
@@ -18,5 +18,9 @@ export class UtilityService {
 
   generateFakeImageGuid = () => {
     return 'IMG' + this.generateFakeClientGuid();
+  }
+
+  isNullOrEmptyString = (s: string) => {
+    return !s || s.length === 0;
   }
 }

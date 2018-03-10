@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {MatDialogModule} from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { FilterPipe} from './filter.pipe';
 

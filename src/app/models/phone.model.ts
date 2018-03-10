@@ -1,6 +1,6 @@
 namespace Models {
     export class Phone {
-        name: string;
+        number: string;
         label: string;
     }
 }

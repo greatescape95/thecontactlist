@@ -1,15 +1,59 @@
+<div class="container">
+  <div class="row">
 
-  <div class="container">
-      <div class="row">
-          <div class="col-lg-12" id="contact-form">
-              <a (click)="onBackClick()">go back</a>
-            <div class="divider"></div>
-            <p>{{contact.name}}</p>
-            <p>email: {{contact.email}}</p>
-            <p>numbers:</p>
-            <p *ngFor="let phone of contact.phones">
-              {{phone.name}}
-            </p>
+    <div class="contact-detail-container">
+
+      <div class="detail-header-container">
+        <div class="detail-img-container">
+          <img class="img-circle" [src]="getImageSrc()">
+          <div class="detail-title-sm"><span>{{contact.name}}</span></div>
+        </div>
+        <div class="detail-header-content">
+          <div class="align-left">
+            <i class="fa icon-custom fa-arrow-left fa-2x has-cursor" (click)="onBackClick()"></i>
+            <span class="detail-header-text">{{contact.name}}</span>
+          </div>
+          <div class="align-right">
+            <i class="fa icon-custom" [ngClass]="{'fa-heart': contact.isFavorite, 'fa-heart-o': !contact.isFavorite}"></i>
+            <i class="fa icon-custom fa-edit has-cursor" (click)="editContact()"></i>
+          </div>
+          <div class="cb"></div>
+        </div>
+      </div>
+
+      <div class="detail-content-container">
+        <div class="detail-content">
+          <div class="detail-content-row">
+            <div class="detail-content-left">
+              <i class="fa icon-custom fa-envelope-o"></i>
+              <span>
+                <strong>email</strong>
+              </span>
+            </div>
+            <div class="detail-content-right">
+              <p>{{contact.email}}</p>
+            </div>
+          </div>
+          <div class="detail-content-row">
+            <div class="detail-content-left">
+              <i class="fa icon-custom fa-phone"></i>
+              <span>
+                <strong>numbers</strong>
+              </span>
+            </div>
+            <div class="detail-content-right" *ngFor="let phone of contact.phones">
+              <div class="detail-phone-label">
+                <span>{{phone.label}}</span>
+              </div>
+              <div class="detail-phone-number">
+                <span>{{phone.number}}</span>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
+
+    </div>
+
   </div>
+</div>

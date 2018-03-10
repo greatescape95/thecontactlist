@@ -24,8 +24,21 @@
                 <label>numbers
                   <span>*</span>
                 </label>
-                <input class="form-control" [(ngModel)]="contact.imgUrl" #phone="ngModel" id="subject" name="subject" type="text" required>
-                <!-- <app-show-errors [control]="phone"></app-show-errors> -->
+                <div (click)="addNewPhoneInput()">add phone</div>
+                <div *ngFor="let phone of contact.phones; let i = index; trackBy: trackByIndex">
+                    <input class="form-control" [(ngModel)]="phone.number" name="number-{{i}}" type="text" required placeholder="number">
+                    <input class="form-control" [(ngModel)]="phone.label" name="label-{{i}}" type="text" placeholder="label">
+                    <span (click)="removePhone(i)">remove</span>              
+                    <!-- <app-show-errors [control]="phone"></app-show-errors> -->
+                </div>
+
+                <div *ngFor="let test1 of tests; let i = index;">
+                    <input class="form-control" [(ngModel)]="tests[i]" name="test1" type="text" required placeholder="label">          
+                    <!-- <app-show-errors [control]="phone"></app-show-errors> -->
+                </div>
+
+                
+
               </div>
             </div>
 

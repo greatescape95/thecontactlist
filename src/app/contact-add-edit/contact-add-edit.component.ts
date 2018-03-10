@@ -1,3 +1,4 @@
+import * as _ from 'underscore';
 import { UtilityService } from './../utility.service';
 import { LocalStorageService } from './../local-storage.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -6,6 +7,7 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { NgForm } from '@angular/forms/src/directives/ng_form';
+import { TrackByFunction } from '@angular/core';
 
 @Component({
   selector: 'app-contact-add-edit',
@@ -17,6 +19,7 @@ export class ContactAddEditComponent implements OnInit {
   private isEdit: boolean;
   private contact: Models.ContactDetail;
   private editingContactId: string;
+  private tests: string[];
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +37,9 @@ export class ContactAddEditComponent implements OnInit {
 
       if (this.isEdit) {
         this.contact = this.localStorageService.getContactByKey(this.editingContactId);
+        if (this.contact.phones.length === 0) {
+          this.addNewPhoneInput();
+        }
       } else {
         this.contact = {
           id: null,
@@ -41,7 +47,7 @@ export class ContactAddEditComponent implements OnInit {
           imgUrl: null,
           email: null,
           isFavorite: false,
-          phones: []
+          phones: [{ number: '', label: '' }]
         };
       }
     });
@@ -75,15 +81,31 @@ export class ContactAddEditComponent implements OnInit {
 
 
   onSaveClick = () => {
-    if (this.isEdit) {
-      this.localStorageService.addOrUpdateContact(this.contact);
-    } else {
+    if (!this.isEdit) {
       const uniqueContactKey = this.utilityService.generateFakeClientGuid();
       this.contact.id = uniqueContactKey;
-      this.localStorageService.addOrUpdateContact(this.contact);
     }
-
+    this.removeEmptyPhones();
+    this.localStorageService.addOrUpdateContact(this.contact);
     this.router.navigateByUrl('/contacts');
+  }
+
+  private removeEmptyPhones = () => {
+    this.contact.phones = _.filter(this.contact.phones, (phone: Models.Phone) => {
+      return !this.utilityService.isNullOrEmptyString(phone.number);
+    });
+  }
+
+  removePhone = (index: number) => {
+    this.contact.phones.splice(index, 1);
+  }
+
+  addNewPhoneInput = () => {
+    this.contact.phones.push({ number: '', label: '' });
+  }
+
+  trackByIndex(index: number, value: number) {
+    return index;
   }
 
 }

@@ -37,7 +37,6 @@ export class LocalStorageService {
   }
 
   getContactByKey(key): any {
-    console.log(this.storage.get(key));
     return this.storage.get(key);
   }
 
