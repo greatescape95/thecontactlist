@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms/src/directives/ng_form';
   templateUrl: './contact-detail.component.html',
   styleUrls: ['./contact-detail.component.css']
 })
+
 export class ContactDetailComponent implements OnInit {
 
   private isEdit: boolean;
@@ -22,8 +23,7 @@ export class ContactDetailComponent implements OnInit {
     private location: Location,
     private router: Router,
     private localStorageService: LocalStorageService
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -32,15 +32,15 @@ export class ContactDetailComponent implements OnInit {
     });
   }
 
-  onBackClick = () => {
-    this.location.back();
-  }
-
   getImageSrc = () => {
-      return this.localStorageService.getImageByKey(this.contact.imgUrl);
+    return this.localStorageService.getImageByKey(this.contact.imgUrl);
   }
 
   editContact = () => {
     this.router.navigateByUrl(`/contacts/detail/edit/${this.contact.id}`);
+  }
+
+  onBackClick = () => {
+    this.location.back();
   }
 }

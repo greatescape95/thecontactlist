@@ -1,5 +1,4 @@
 namespace Models {
-
     export class ContactDetail {
         id: string;
         name: string;

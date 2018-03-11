@@ -1,6 +1,5 @@
-
-import { Router } from '@angular/router';
 import { LocalStorageService } from './../../services/local-storage.service';
+import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,10 +10,10 @@ import { Component, OnInit } from '@angular/core';
 
 export class ContactListComponent implements OnInit {
 
-  private contacts: any;
-  searchText: string;
-  selectedTabIndex = 0;
-  tabItems: string[];
+  private contacts: Models.ContactDetail[];
+  private searchText: string;
+  private selectedTabIndex = 0;
+  private tabItems: string[];
 
   constructor(
     private localStorageService: LocalStorageService,
@@ -26,20 +25,7 @@ export class ContactListComponent implements OnInit {
     this.tabItems = ['All contacts', 'My favorites'];
   }
 
-  private initContacts = () => {
-    this.contacts = this.localStorageService.getContacts();
-  }
-
-  switchTabSelection = (index: number) => {
-    this.selectedTabIndex = index;
-  }
-
-  changeFavoriteStatus = (contact) => {
-    contact.isFavorite = !contact.isFavorite;
-    this.localStorageService.addOrUpdateContact(contact);
-  }
-
-  openContactDetails = (contact: any) => {
+  openContactDetails = (contact: Models.ContactDetail) => {
     this.router.navigateByUrl(`/contacts/detail/${contact.id}`);
   }
 
@@ -47,13 +33,26 @@ export class ContactListComponent implements OnInit {
     return this.localStorageService.getImageByKey(key);
   }
 
-  editContact = (contact: any) => {
+  editContact = (contact: Models.ContactDetail) => {
     this.router.navigateByUrl(`/contacts/detail/edit/${contact.id}`);
   }
 
-  deleteContact = (contact: any) => {
+  deleteContact = (contact: Models.ContactDetail) => {
     this.localStorageService.deleteContact(contact.id).then(() => {
       this.initContacts();
     });
+  }
+
+  changeFavoriteStatus = (contact: Models.ContactDetail) => {
+    contact.isFavorite = !contact.isFavorite;
+    this.localStorageService.addOrUpdateContact(contact);
+  }
+
+  switchTabSelection = (index: number) => {
+    this.selectedTabIndex = index;
+  }
+
+  private initContacts = () => {
+    this.contacts = this.localStorageService.getContacts();
   }
 }

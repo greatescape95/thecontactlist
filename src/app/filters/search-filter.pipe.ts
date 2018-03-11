@@ -1,8 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import * as _ from 'underscore';
+
 @Pipe({
     name: 'searchFilter'
 })
+
 export class FilterPipe implements PipeTransform {
     transform(items: Models.ContactDetail[], searchText: string): any[] {
         if (!items) {

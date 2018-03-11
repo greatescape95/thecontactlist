@@ -1,4 +1,5 @@
 import * as _ from 'underscore';
+
 import { UtilityService } from './../../services/utility.service';
 import { LocalStorageService } from './../../services/local-storage.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -14,6 +15,7 @@ import { TrackByFunction } from '@angular/core';
   templateUrl: './contact-add-edit.component.html',
   styleUrls: ['./contact-add-edit.component.css']
 })
+
 export class ContactAddEditComponent implements OnInit {
 
   private contact: Models.ContactDetail;
@@ -37,15 +39,26 @@ export class ContactAddEditComponent implements OnInit {
 
       if (this.isEdit) {
         this.contact = this.localStorageService.getContactByKey(this.editingContactId);
-        if (this.contact.phones.length === 0) {
-          this.addNewPhoneInput();
-        }
       } else {
         this.initContact();
       }
     });
 
     this.initFileUploaderLogic();
+  }
+
+  deleteContact = () => {
+    this.localStorageService.deleteContact(this.contact.id).then(() => {
+      this.router.navigateByUrl('/contacts');
+    });
+  }
+
+  addNewPhoneInput = () => {
+    this.contact.phones.push({ number: '', label: '' });
+  }
+
+  removePhone = (index: number) => {
+    this.contact.phones.splice(index, 1);
   }
 
   getImageSrc = () => {
@@ -65,23 +78,9 @@ export class ContactAddEditComponent implements OnInit {
       const uniqueContactKey = this.utilityService.generateFakeClientGuid();
       this.contact.id = uniqueContactKey;
     }
-    this.removeEmptyPhones();
+    this.removeEmptyPhonesIfAny();
     this.localStorageService.addOrUpdateContact(this.contact);
     this.router.navigateByUrl('/contacts');
-  }
-
-  deleteContact = () => {
-    this.localStorageService.deleteContact(this.contact.id).then(() => {
-      this.router.navigateByUrl('/contacts');
-    });
-  }
-
-  removePhone = (index: number) => {
-    this.contact.phones.splice(index, 1);
-  }
-
-  addNewPhoneInput = () => {
-    this.contact.phones.push({ number: '', label: '' });
   }
 
   trackByIndex(index: number, value: number) {
@@ -119,7 +118,7 @@ export class ContactAddEditComponent implements OnInit {
     this.uploaderElement.style.display = 'none';
   }
 
-  private removeEmptyPhones = () => {
+  private removeEmptyPhonesIfAny = () => {
     this.contact.phones = _.filter(this.contact.phones, (phone: Models.Phone) => {
       return !this.utilityService.isNullOrEmptyString(phone.number);
     });

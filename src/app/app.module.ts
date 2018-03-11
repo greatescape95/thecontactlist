@@ -42,4 +42,5 @@ import { FilterPipe } from './filters/search-filter.pipe';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }
