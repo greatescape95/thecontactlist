@@ -69,16 +69,8 @@ a:hover {
     padding-bottom: 40px;
 }
 
-.pt_50 {
-    padding-top: 50px;
-}
-
-.align-left {
-    float: left;
-}
-
-.align-right {
-    float: right;
+.pt_40 {
+    padding-top: 40px;
 }
 
 .icon-custom {
@@ -89,6 +81,11 @@ a:hover {
 .img-circle {
     border-radius: 50%;
     border: 2px solid @color-text;
+}
+
+.img-overlay {
+    opacity: 0.8;
+    background-color: #000;
 }
 
 .vh-icon {
@@ -104,7 +101,6 @@ a:hover {
     span {
         color: @color-brand;
     }
-
 }
 
 @media (max-width:768px) {
@@ -155,6 +151,7 @@ a:hover {
     font-family: "Roboto";
     font-size: 14px;
     position: relative;
+    background: rgba(255, 255, 255, .5);
 }
 
 @media (max-width:768px) {
@@ -372,9 +369,11 @@ a:hover {
             height: 180px;
             float: left;
             margin: 5px;
-            img {
+            .img-detail,
+            .img-add-edit {
                 width: 100%;
                 height: 100%;
+                opacity: 0.7;
             }
             .detail-title-sm {
                 display: none;
@@ -484,9 +483,13 @@ a:hover {
                 padding: 25px 15px;
                 order: 2;
                 position: relative;
-                img {
+                .img-detail {
                     width: 50px;
                     height: 50px;
+                }
+                .img-add-edit {
+                    width: 120px;
+                    height: 120px;
                 }
                 .detail-title-sm {
                     display: block;
@@ -582,6 +585,9 @@ a:hover {
 .add-edit-img-container {
     position: relative;
     text-align: center;
+    border-radius: 50%;
+    background-color: #000;
+    height: 100%;
     .img-text {
         position: absolute;
         font-size: 30px !important;
@@ -598,12 +604,18 @@ a:hover {
         line-height: 120px;
         margin-left: calc(50% - 60px);
     }
+    .add-edit-img-container {
+        .img-text {
+            top: 50px;
+            left: 50px;
+        }
+    }
 }
 
 .add-edit-form-container {
-    width: calc(100% - 175px);
+    width: calc(100% - 200px);
     margin-top: -70px;
-    margin-left: 175px;
+    margin-left: 200px;
     .add-number-container {
         padding-top: 20px;
         clear: both;
@@ -611,41 +623,144 @@ a:hover {
             float: left;
             height: 40px;
             line-height: 40px;
+            span {
+                color: @color-brand !important;
+            }
         }
         div:first-child {
             width: 40px;
         }
     }
-    .icon-number {
+    .icon-remove {
         color: @color-faded;
         font-size: 36px;
     }
-    .icon-remove {
-        margin-left: -20px;
+    .icon-number {
+        color: @color-brand;
+        font-size: 36px;
     }
 }
 
 @media(max-width: 1150px) {
     .add-edit-form-container {
-        width: calc(100% - 115px);
-        margin-left: 115px;
+        width: calc(100% - 140px);
+        margin-left: 140px;
     }
 }
 
 @media (max-width:768px) {
+    .add-edit-img-container {
+        width: 100%;
+        .img-text {
+            top: 50px;
+            left: calc(50% - 15px);
+        }
+    }
     .add-edit-form-container {
-        margin-top: 60px;
+        margin-top: 65px;
         margin-left: 0;
         width: 100%;
+        padding: 0 10px;
+        .border-custom-form:first-child {
+            padding-top: 20px;
+            border-top: 2px solid @color-brand;
+        }
     }
 }
 
-//overrides
-.cdk-overlay-container {
-    position: fixed !important;
-    left: calc(50% - 150px) !important;
-    top: calc(50% - 150px) !important;
+.btn-custom {
+    width: 150px;
+    border-radius: 20px;
+    color: @color-white;
+    font-size: 14px;
+}
+
+.btn-custom-save {
+    background-color: @color-brand;
+}
+
+.border-custom-form {
+    border-bottom: 2px solid @color-brand;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+//confirm dialog
+.confirm-dialog-container {
+    margin: -24px;
+    color: @color-text;
+    font-size: 18px;
     z-index: 1000 !important;
+    .confirm-dialog-header {
+        border-bottom: 1px solid @color-text;
+        height: 60px;
+        line-height: 60px;
+        padding-left: 20px;
+    }
+    .confirm-dialog-message {
+        text-align: center;
+        height: 150px;
+        padding: 20px;
+        display: table;
+        width: 100%;
+        span {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    }
+    .confirm-dialog-btn-container {
+        .btn-custom-save {
+            float: right;
+        }
+    }
+}
+
+@media(max-width: 768px) {
+    .confirm-dialog-container {
+        .confirm-dialog-btn-container {
+            div {
+                text-align: center;
+                .btn-custom-save,
+                .btn-custom-cancel {
+                    float: none;
+                }
+            }
+            div:first-child {
+                padding-bottom: 15px;
+            }
+        }
+    }
+}
+
+.confirm-dialog-custom-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1005;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+//confirm dialog overrides
+.cdk-global-overlay-wrapper {
+    position: fixed;
+    left: calc(50% - 250px);
+    top: calc(50% - 150px);
+    width: 500px;
     background-color: @color-white;
-    overflow: hidden;
+    border-radius: 5px;
+    z-index: 1010;
+}
+
+@media(max-width: 768px) {
+    .cdk-global-overlay-wrapper {
+        left: calc(50% - 150px);
+        top: calc(50% - 150px);
+        width: 300px;
+    }
+}
+
+.mat-dialog-container {
+    box-shadow: 0 0 0 0 !important;
 }

@@ -100,6 +100,12 @@ export class ContactAddEditComponent implements OnInit {
     this.router.navigateByUrl('/contacts');
   }
 
+  deleteContact = () => {
+    this.localStorageService.deleteContact(this.contact.id).then(() => {
+      this.router.navigateByUrl('/contacts');
+    });
+  }
+
   private removeEmptyPhones = () => {
     this.contact.phones = _.filter(this.contact.phones, (phone: Models.Phone) => {
       return !this.utilityService.isNullOrEmptyString(phone.number);

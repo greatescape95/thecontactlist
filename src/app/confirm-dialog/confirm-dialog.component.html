@@ -1,12 +1,14 @@
-<div style="position:absolute; width:250px; margin:auto;">
-    <h1 mat-dialog-title>Add file</h1>
-    <mat-dialog-content>
-      Do you really want to delete this contact?
-    </mat-dialog-content>
-    <mat-dialog-actions>
-      <button mat-button type="button" [mat-dialog-close] ="true">Add</button>
-      <button mat-button type="button" mat-dialog-close>Cancel</button>
-    </mat-dialog-actions>
-
+<div class="confirm-dialog-container">
+  <div class="confirm-dialog-header">Delete</div>
+  <div class="confirm-dialog-message">
+    <span>Are you sure you want to delete this contact?</span>
+  </div>
+  <div class="confirm-dialog-btn-container">
+    <div class="col-sm-12 col-md-6 fll">
+      <button class="btn btn-custom btn-custom-cancel" mat-button type="button" mat-dialog-close>Cancel</button>
+    </div>
+    <div class="col-sm-12 col-md-6 flr">
+      <button class="btn btn-custom btn-custom-save" mat-button type="button" [mat-dialog-close]="true">Delete</button>
+    </div>
+  </div>
 </div>
-

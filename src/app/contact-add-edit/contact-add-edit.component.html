@@ -1,22 +1,25 @@
 <div class="container">
   <div class="row">
-
     <div class="contact-detail-container">
       <div class="detail-header-container">
         <div class="detail-img-container">
+          
           <div class="add-edit-img-container" *ngIf="isEdit || isImageUploaded">
-            <img class="img-circle" [src]="getImageSrc()">
+            <img class="img-circle img-add-edit" [src]="getImageSrc()">
             <i class="fa fa-times-circle img-text has-cursor" (click)="changeImage()"></i>
           </div>
+
+
           <div class="img-circle upload-button has-cursor" *ngIf="!isEdit && !isImageUploaded" (click)="changeImage()">
             <i class="fa fa-upload fa-2x"></i>
           </div>
+          
         </div>
         <div class="detail-header-content">
-          <div class="align-left">
+          <div class="fll">
             <i class="fa icon-custom fa-arrow-left fa-2x has-cursor" (click)="onCancelClick()"></i>
           </div>
-          <div class="align-right" *ngIf="isEdit">
+          <div class="flr" *ngIf="isEdit">
             <span class="pr_10">Delete</span>
             <i class="fa icon-custom fa-trash has-cursor" (click)="deleteContact()"></i>
           </div>
@@ -27,78 +30,85 @@
         <form #contactForm="ngForm" class="reply" novalidate>
           <fieldset>
 
-            <div class="col-md-6 col-sm-12 pb_20">
-              <div class="form-label-wrapper">
-                <i class="fa icon-custom fa-user-o"></i>
+            <div class="border-custom-form">
+              <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-label-wrapper">
+                    <i class="fa icon-custom fa-user-o"></i>
+                    <span>
+                      <strong>full name*</strong>
+                    </span>
+                  </div>
+                  <input class="form-control" [(ngModel)]="contact.name" #name="ngModel" id="name" name="name" type="text" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="border-custom-form">
+              <div class="row">
+                <div class="col-md-6 col-sm-12">
+                  <div class="form-label-wrapper">
+                    <i class="fa icon-custom fa-envelope-o"></i>
+                    <span>
+                      <strong>email*</strong>
+                    </span>
+                  </div>
+                  <input class="form-control" [(ngModel)]="contact.email" #email="ngModel" type="email" id="email" name="email" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-sm-12 form-label-wrapper">
+                <i class="fa icon-custom fa-phone"></i>
                 <span>
-                  <strong>full name</strong>
+                  <strong>numbers</strong>
                 </span>
               </div>
-
-              <input class="form-control" [(ngModel)]="contact.name" #name="ngModel" id="name" name="name" type="text" required>
-
             </div>
-            <div class="col-md-6 col-sm-12 pb_20">
-              <div class="form-label-wrapper">
-                <i class="fa icon-custom fa-envelope-o"></i>
-                <span>
-                  <strong>email</strong>
-                </span>
-              </div>
-              <input class="form-control" [(ngModel)]="contact.email" #email="ngModel" type="email" id="email" name="email">
-
-            </div>
-
-            <div class="col-sm-12 form-label-wrapper">
-              <i class="fa icon-custom fa-phone"></i>
-              <span>
-                <strong>numbers</strong>
-              </span>
-            </div>
-
 
             <div *ngFor="let phone of contact.phones; let i = index; trackBy: trackByIndex">
-              <div class="col-12 col-sm-6 fll pb_20">
-                <input class="form-control" [(ngModel)]="phone.number" name="number-{{i}}" type="text" required placeholder="number">
-              </div>
-              <div class="col-10 col-sm-5 fll pb_20">
-                <input class="form-control" [(ngModel)]="phone.label" name="label-{{i}}" type="text" placeholder="label">
-              </div>
-              <div class="col-2 col-sm-1 fll pb_20">
-                <i class="fa fa-times-circle icon-number icon-remove" (click)="removePhone(i)"></i>
-              </div>
-
-              <!-- <app-show-errors [control]="phone"></app-show-errors> -->
-            </div>
-            <div class="col-sm-12 cb">
-              <div class="add-number-container">
-                <div>
-                  <i class="fa fa-plus-circle icon-number" (click)="addNewPhoneInput()"></i>
+              <div class="row">
+                <div class="col-12 col-sm-6 fll pb_20">
+                  <input class="form-control" [(ngModel)]="phone.number" name="number-{{i}}" type="text" required placeholder="number*">
                 </div>
-                <div>
-                  <span>Add number</span>
+                <div class="col-10 col-sm-5 fll pb_20">
+                  <input class="form-control" [(ngModel)]="phone.label" name="label-{{i}}" type="text" placeholder="label">
                 </div>
-
+                <div class="col-2 col-sm-1 fll pb_20 pull-right">
+                  <i class="fa fa-times-circle icon-remove" (click)="removePhone(i)"></i>
+                </div>
+                <!-- <app-show-errors [control]="phone"></app-show-errors> -->
               </div>
             </div>
+
+            <div class="row">
+              <div class="col-sm-12 cb">
+                <div class="add-number-container">
+                  <div>
+                    <i class="fa fa-plus-circle icon-number has-cursor" (click)="addNewPhoneInput()"></i>
+                  </div>
+                  <div>
+                    <span>Add number</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
             <input class="form-control" id="uploadImage" type="file">
-            <div class="col-sm-12 cb pt_50">
-              <button class="btn btn-normal btn-warning bottom-pad fll" (click)="onCancelClick()">Cancel</button>
-              <button class="btn btn-normal btn-color submit  bottom-pad flr" (click)="onSaveClick()" [disabled]="contactForm.invalid">Save</button>
+
+            <div class="row cb">
+              <div class="col-sm-12 pt_40 pb_20">
+                <button class="btn btn-custom fll" (click)="onCancelClick()">Cancel</button>
+                <button class="btn btn-custom btn-custom-save flr" (click)="onSaveClick()" [disabled]="contactForm.invalid">Save</button>
+              </div>
             </div>
-
-
-
-
 
           </fieldset>
         </form>
-
       </div>
 
-
     </div>
-
 
   </div>
 </div>

@@ -5,15 +5,15 @@
 
       <div class="detail-header-container">
         <div class="detail-img-container">
-          <img class="img-circle" [src]="getImageSrc()">
+          <img class="img-circle img-detail" [src]="getImageSrc()">
           <div class="detail-title-sm"><span>{{contact.name}}</span></div>
         </div>
         <div class="detail-header-content">
-          <div class="align-left">
+          <div class="fll">
             <i class="fa icon-custom fa-arrow-left fa-2x has-cursor" (click)="onBackClick()"></i>
             <span class="detail-header-text">{{contact.name}}</span>
           </div>
-          <div class="align-right">
+          <div class="flr">
             <i class="fa icon-custom" [ngClass]="{'fa-heart': contact.isFavorite, 'fa-heart-o': !contact.isFavorite}"></i>
             <i class="fa icon-custom fa-edit has-cursor" (click)="editContact()"></i>
           </div>

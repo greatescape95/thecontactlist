@@ -30,11 +30,11 @@
       <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pd-0" *ngFor="let contact of contacts | filter : searchText" [hidden]="selectedTabIndex === 1 && !contact.isFavorite">
         <div class="contact-item-container">
           <div class="item-icons-container">
-            <div class="align-left">
+            <div class="fll">
               <i class="fa icon-custom" [ngClass]="{'fa-heart': contact.isFavorite, 'fa-heart-o': !contact.isFavorite}" (click)="changeFavoriteStatus(contact)"></i>
               <i class="fa fa-heart vh-icon"></i>
             </div>
-            <div class="align-right">
+            <div class="flr">
               <i class="fa icon-custom fa-edit" (click)="editContact(contact)"></i>
               <i class="fa icon-custom fa-trash" (click)="deleteContact(contact)"></i>
             </div>
