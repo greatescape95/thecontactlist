@@ -1,5 +1,4 @@
 import * as _ from 'underscore';
-import * as $ from 'jquery';
 import { UtilityService } from './../utility.service';
 import { LocalStorageService } from './../local-storage.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -17,11 +16,10 @@ import { TrackByFunction } from '@angular/core';
 })
 export class ContactAddEditComponent implements OnInit {
 
-  private isEdit: boolean;
   private contact: Models.ContactDetail;
   private editingContactId: string;
-  private tests: string[];
   private uploaderElement: HTMLElement;
+  private isEdit: boolean;
   private isImageUploaded: boolean;
 
   constructor(
@@ -30,8 +28,7 @@ export class ContactAddEditComponent implements OnInit {
     private router: Router,
     private localStorageService: LocalStorageService,
     private utilityService: UtilityService
-  ) {
-  }
+  ) { }
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
@@ -44,38 +41,11 @@ export class ContactAddEditComponent implements OnInit {
           this.addNewPhoneInput();
         }
       } else {
-        this.contact = {
-          id: null,
-          name: null,
-          imgUrl: null,
-          email: null,
-          isFavorite: false,
-          phones: [{ number: '', label: '' }]
-        };
+        this.initContact();
       }
     });
 
     this.initFileUploaderLogic();
-  }
-
-  private initFileUploaderLogic = () => {
-    this.uploaderElement = document.getElementById('uploadImage');
-    this.uploaderElement.onchange = (evt: any) => {
-      const tgt = evt.target || window.event.srcElement;
-      const files = tgt.files;
-
-      if (FileReader && files && files.length) {
-        const fr = new FileReader();
-        fr.onload = () => {
-          const uniqueImageKey = this.utilityService.generateFakeImageGuid();
-          this.contact.imgUrl = uniqueImageKey;
-          this.localStorageService.addImage(uniqueImageKey, fr.result);
-        };
-        fr.readAsDataURL(files[0]);
-        this.isImageUploaded = true;
-      }
-    };
-    this.uploaderElement.style.display = 'none';
   }
 
   getImageSrc = () => {
@@ -106,12 +76,6 @@ export class ContactAddEditComponent implements OnInit {
     });
   }
 
-  private removeEmptyPhones = () => {
-    this.contact.phones = _.filter(this.contact.phones, (phone: Models.Phone) => {
-      return !this.utilityService.isNullOrEmptyString(phone.number);
-    });
-  }
-
   removePhone = (index: number) => {
     this.contact.phones.splice(index, 1);
   }
@@ -124,4 +88,40 @@ export class ContactAddEditComponent implements OnInit {
     return index;
   }
 
+  private initContact = () => {
+    this.contact = {
+      id: null,
+      name: null,
+      imgUrl: null,
+      email: null,
+      isFavorite: false,
+      phones: [{ number: '', label: '' }]
+    };
+  }
+
+  private initFileUploaderLogic = () => {
+    this.uploaderElement = document.getElementById('uploadImage');
+    this.uploaderElement.onchange = (evt: any) => {
+      const tgt = evt.target || window.event.srcElement;
+      const files = tgt.files;
+
+      if (FileReader && files && files.length) {
+        const fr = new FileReader();
+        fr.onload = () => {
+          const uniqueImageKey = this.utilityService.generateFakeImageGuid();
+          this.contact.imgUrl = uniqueImageKey;
+          this.localStorageService.addImage(uniqueImageKey, fr.result);
+        };
+        fr.readAsDataURL(files[0]);
+        this.isImageUploaded = true;
+      }
+    };
+    this.uploaderElement.style.display = 'none';
+  }
+
+  private removeEmptyPhones = () => {
+    this.contact.phones = _.filter(this.contact.phones, (phone: Models.Phone) => {
+      return !this.utilityService.isNullOrEmptyString(phone.number);
+    });
+  }
 }

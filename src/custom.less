@@ -1,5 +1,6 @@
 //color definitions
 @color-white: #fff;
+@color-black: #000;
 @color-brand: #43a0b0;
 @color-text: #C0C0C0;
 @color-faded: #e0e0e0;
@@ -85,7 +86,7 @@ a:hover {
 
 .img-overlay {
     opacity: 0.8;
-    background-color: #000;
+    background-color: @color-black;
 }
 
 .vh-icon {
@@ -586,7 +587,7 @@ a:hover {
     position: relative;
     text-align: center;
     border-radius: 50%;
-    background-color: #000;
+    background-color: @color-black;
     height: 100%;
     .img-text {
         position: absolute;
@@ -594,6 +595,9 @@ a:hover {
         top: 80px;
         left: 80px;
         color: @color-text;
+    }
+    i {
+        color: @color-white !important;
     }
 }
 
@@ -690,7 +694,6 @@ a:hover {
     margin: -24px;
     color: @color-text;
     font-size: 18px;
-    z-index: 1000 !important;
     .confirm-dialog-header {
         border-bottom: 1px solid @color-text;
         height: 60px;
