@@ -1,0 +1,10 @@
+/home/ct/dev/the-contact-list/bin/Debug/netcoreapp2.0/the-contact-list.deps.json
+/home/ct/dev/the-contact-list/bin/Debug/netcoreapp2.0/the-contact-list.runtimeconfig.json
+/home/ct/dev/the-contact-list/bin/Debug/netcoreapp2.0/the-contact-list.runtimeconfig.dev.json
+/home/ct/dev/the-contact-list/bin/Debug/netcoreapp2.0/the-contact-list.dll
+/home/ct/dev/the-contact-list/bin/Debug/netcoreapp2.0/the-contact-list.pdb
+/home/ct/dev/the-contact-list/obj/Debug/netcoreapp2.0/the-contact-list.csproj.CoreCompileInputs.cache
+/home/ct/dev/the-contact-list/obj/Debug/netcoreapp2.0/the-contact-list.AssemblyInfoInputs.cache
+/home/ct/dev/the-contact-list/obj/Debug/netcoreapp2.0/the-contact-list.AssemblyInfo.cs
+/home/ct/dev/the-contact-list/obj/Debug/netcoreapp2.0/the-contact-list.dll
+/home/ct/dev/the-contact-list/obj/Debug/netcoreapp2.0/the-contact-list.pdb
