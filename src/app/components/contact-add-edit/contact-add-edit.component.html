@@ -1,19 +1,17 @@
 <div class="container">
   <div class="row">
+
     <div class="contact-detail-container">
+
       <div class="detail-header-container">
         <div class="detail-img-container">
-          
           <div class="add-edit-img-container" *ngIf="isEdit || isImageUploaded">
             <img class="img-circle img-add-edit" [src]="getImageSrc()">
             <i class="fa fa-times-circle img-text has-cursor" (click)="changeImage()"></i>
           </div>
-
-
           <div class="img-circle upload-button has-cursor" *ngIf="!isEdit && !isImageUploaded" (click)="changeImage()">
             <i class="fa fa-upload fa-2x"></i>
           </div>
-          
         </div>
         <div class="detail-header-content">
           <div class="fll">

@@ -1,55 +1,55 @@
-  <div class="tabs-container">
-    <ul>
-      <li *ngFor="let item of tabItems; let i = index">
-        <p [ngClass]="{'color-tab': selectedTabIndex === i, 'has-cursor': selectedTabIndex !== i}" (click)="switchTabSelection(i)">{{item}}</p>
-      </li>
-    </ul>
-  </div>
+<div class="tabs-container">
+  <ul>
+    <li *ngFor="let item of tabItems; let i = index">
+      <p [ngClass]="{'color-tab': selectedTabIndex === i, 'has-cursor': selectedTabIndex !== i}" (click)="switchTabSelection(i)">{{item}}</p>
+    </li>
+  </ul>
+</div>
 
-  <div class="search-container">
-    <div class="search-bar">
-      <form>
-        <span class="fa fa-search"></span>
-        <input class="form-control" [(ngModel)]="searchText" name="searchText" placeholder="Search contact">
-      </form>
+<div class="search-container">
+  <div class="search-bar">
+    <form>
+      <span class="fa fa-search"></span>
+      <input class="form-control" [(ngModel)]="searchText" name="searchText" placeholder="Search contact">
+    </form>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pd_0">
+      <div class="add-new-container">
+        <div class="add-new-item">
+          <i routerLink="/contacts/add" class="fa fa-plus fa-2x has-cursor"></i>
+          <a routerLink="/contacts/add">Add new</a>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="container">
-    <div class="row">
-
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pd-0">
-        <div class="add-new-container">
-          <div class="add-new-item">
-            <i routerLink="/contacts/add" class="fa fa-plus fa-2x has-cursor"></i>
-            <a routerLink="/contacts/add">Add new</a>
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pd_0" *ngFor="let contact of contacts | searchFilter : searchText" [hidden]="selectedTabIndex === 1 && !contact.isFavorite">
+      <div class="contact-item-container">
+        <div class="item-icons-container">
+          <div class="fll">
+            <i class="fa icon-custom" [ngClass]="{'fa-heart': contact.isFavorite, 'fa-heart-o': !contact.isFavorite}" (click)="changeFavoriteStatus(contact)"></i>
+            <i class="fa fa-heart vh-icon"></i>
+          </div>
+          <div class="flr">
+            <i class="fa icon-custom fa-edit" (click)="editContact(contact)"></i>
+            <i class="fa icon-custom fa-trash" (click)="deleteContact(contact)"></i>
+          </div>
+          <div class="cb"></div>
+        </div>
+        <div (click)="openContactDetails(contact)" class="has-cursor">
+          <div class="item-image-container">
+            <img class="img-circle" [src]="getImageSrcByKey(contact.imgUrl)">
+          </div>
+          <div class="item-text-container">
+            <span class="item-text">{{contact.name}}</span>
           </div>
         </div>
       </div>
-
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pd-0" *ngFor="let contact of contacts | searchFilter : searchText" [hidden]="selectedTabIndex === 1 && !contact.isFavorite">
-        <div class="contact-item-container">
-          <div class="item-icons-container">
-            <div class="fll">
-              <i class="fa icon-custom" [ngClass]="{'fa-heart': contact.isFavorite, 'fa-heart-o': !contact.isFavorite}" (click)="changeFavoriteStatus(contact)"></i>
-              <i class="fa fa-heart vh-icon"></i>
-            </div>
-            <div class="flr">
-              <i class="fa icon-custom fa-edit" (click)="editContact(contact)"></i>
-              <i class="fa icon-custom fa-trash" (click)="deleteContact(contact)"></i>
-            </div>
-            <div class="cb"></div>
-          </div>
-          <div (click)="openContactDetails(contact)" class="has-cursor">
-            <div class="item-image-container">
-              <img class="img-circle" [src]="getImageSrcByKey(contact.imgUrl)">
-            </div>
-            <div class="item-text-container">
-              <span class="item-text">{{contact.name}}</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
     </div>
+
   </div>
+</div>
