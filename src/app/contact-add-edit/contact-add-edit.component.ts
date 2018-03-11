@@ -1,4 +1,5 @@
 import * as _ from 'underscore';
+import * as $ from 'jquery';
 import { UtilityService } from './../utility.service';
 import { LocalStorageService } from './../local-storage.service';
 import { Component, OnInit, Input } from '@angular/core';
@@ -20,6 +21,8 @@ export class ContactAddEditComponent implements OnInit {
   private contact: Models.ContactDetail;
   private editingContactId: string;
   private tests: string[];
+  private uploaderElement: HTMLElement;
+  private isImageUploaded: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -52,8 +55,12 @@ export class ContactAddEditComponent implements OnInit {
       }
     });
 
-    const input = document.getElementById('uploadImage');
-    input.onchange = (evt: any) => {
+    this.initFileUploaderLogic();
+  }
+
+  private initFileUploaderLogic = () => {
+    this.uploaderElement = document.getElementById('uploadImage');
+    this.uploaderElement.onchange = (evt: any) => {
       const tgt = evt.target || window.event.srcElement;
       const files = tgt.files;
 
@@ -65,20 +72,23 @@ export class ContactAddEditComponent implements OnInit {
           this.localStorageService.addImage(uniqueImageKey, fr.result);
         };
         fr.readAsDataURL(files[0]);
+        this.isImageUploaded = true;
       }
     };
+    this.uploaderElement.style.display = 'none';
   }
 
-  getImageUrl = () => {
-    if (this.isEdit) {
-      return this.localStorageService.getImageByKey(this.contact.imgUrl);
-    }
+  getImageSrc = () => {
+    return this.localStorageService.getImageByKey(this.contact.imgUrl);
+  }
+
+  changeImage = () => {
+    this.uploaderElement.click();
   }
 
   onCancelClick = () => {
     this.location.back();
   }
-
 
   onSaveClick = () => {
     if (!this.isEdit) {

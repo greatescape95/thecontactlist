@@ -41,8 +41,36 @@ a:hover {
     text-transform: uppercase;
 }
 
+.fll {
+    float: left;
+}
+
+.flr {
+    float: right;
+}
+
 .pd-0 {
     padding: 0;
+}
+
+.pr_10 {
+    padding-right: 10px;
+}
+
+.pl_10 {
+    padding-left: 10px;
+}
+
+.pb_20 {
+    padding-bottom: 20px;
+}
+
+.pb_40 {
+    padding-bottom: 40px;
+}
+
+.pt_50 {
+    padding-top: 50px;
 }
 
 .align-left {
@@ -67,6 +95,18 @@ a:hover {
     visibility: hidden
 }
 
+.form-label-wrapper {
+    padding-bottom: 20px;
+    i {
+        color: @color-brand;
+        padding-right: 10px;
+    }
+    span {
+        color: @color-brand;
+    }
+
+}
+
 @media (max-width:768px) {
     .vh-icon {
         display: none !important;
@@ -78,6 +118,11 @@ a:hover {
 }
 
 // wrapper
+.header-divider {
+    height: 60px;
+    width: 100%;
+}
+
 .header-container {
     width: 80%;
     position: fixed;
@@ -122,7 +167,6 @@ a:hover {
 .tabs-container {
     width: 90%;
     margin: auto;
-    margin-top: 60px;
     height: 120px;
     border-bottom: 2px solid @color-brand;
     text-align: center !important;
@@ -319,7 +363,6 @@ a:hover {
 .contact-detail-container {
     width: 90%;
     margin: auto;
-    margin-top: 60px;
     .detail-header-container {
         width: 100%;
         height: 230px;
@@ -521,6 +564,79 @@ a:hover {
             padding: 25px 10px;
             width: calc(100% - 20px);
         }
+    }
+}
+
+// add edit contact screen
+.upload-button {
+    background-color: @color-brand;
+    width: 180px;
+    height: 180px;
+    line-height: 200px;
+    text-align: center;
+    i {
+        color: @color-white;
+    }
+}
+
+.add-edit-img-container {
+    position: relative;
+    text-align: center;
+    .img-text {
+        position: absolute;
+        font-size: 30px !important;
+        top: 80px;
+        left: 80px;
+        color: @color-text;
+    }
+}
+
+@media(max-width: 1150px) {
+    .upload-button {
+        width: 120px;
+        height: 120px;
+        line-height: 120px;
+        margin-left: calc(50% - 60px);
+    }
+}
+
+.add-edit-form-container {
+    width: calc(100% - 175px);
+    margin-top: -70px;
+    margin-left: 175px;
+    .add-number-container {
+        padding-top: 20px;
+        clear: both;
+        div {
+            float: left;
+            height: 40px;
+            line-height: 40px;
+        }
+        div:first-child {
+            width: 40px;
+        }
+    }
+    .icon-number {
+        color: @color-faded;
+        font-size: 36px;
+    }
+    .icon-remove {
+        margin-left: -20px;
+    }
+}
+
+@media(max-width: 1150px) {
+    .add-edit-form-container {
+        width: calc(100% - 115px);
+        margin-left: 115px;
+    }
+}
+
+@media (max-width:768px) {
+    .add-edit-form-container {
+        margin-top: 60px;
+        margin-left: 0;
+        width: 100%;
     }
 }
 
