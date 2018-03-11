@@ -10,10 +10,10 @@ import { Component, OnInit } from '@angular/core';
 
 export class ContactListComponent implements OnInit {
 
-  private contacts: Models.ContactDetail[];
-  private searchText: string;
+  contacts: Models.ContactDetail[];
+  searchText: string;
   private selectedTabIndex = 0;
-  private tabItems: string[];
+  tabItems: string[];
 
   constructor(
     private localStorageService: LocalStorageService,

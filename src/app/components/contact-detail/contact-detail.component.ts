@@ -14,8 +14,7 @@ import { NgForm } from '@angular/forms/src/directives/ng_form';
 
 export class ContactDetailComponent implements OnInit {
 
-  private isEdit: boolean;
-  private contact: Models.ContactDetail;
+  contact: Models.ContactDetail;
   private editingContactId: string;
 
   constructor(

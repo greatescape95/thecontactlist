@@ -18,11 +18,11 @@ import { TrackByFunction } from '@angular/core';
 
 export class ContactAddEditComponent implements OnInit {
 
-  private contact: Models.ContactDetail;
+  contact: Models.ContactDetail;
   private editingContactId: string;
   private uploaderElement: HTMLElement;
-  private isEdit: boolean;
-  private isImageUploaded: boolean;
+  isEdit: boolean;
+  isImageUploaded: boolean;
 
   constructor(
     private route: ActivatedRoute,
