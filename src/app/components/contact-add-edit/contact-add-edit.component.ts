@@ -1,6 +1,6 @@
 import * as _ from 'underscore';
-import { UtilityService } from './../utility.service';
-import { LocalStorageService } from './../local-storage.service';
+import { UtilityService } from './../../services/utility.service';
+import { LocalStorageService } from './../../services/local-storage.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';

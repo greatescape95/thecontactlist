@@ -1,4 +1,4 @@
-import { LocalStorageService } from './../local-storage.service';
+import { LocalStorageService } from './../../services/local-storage.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';

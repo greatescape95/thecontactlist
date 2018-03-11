@@ -2,9 +2,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ContactListComponent } from './contact-list/contact-list.component';
-import { ContactDetailComponent } from './contact-detail/contact-detail.component';
-import { ContactAddEditComponent } from './contact-add-edit/contact-add-edit.component';
+import { ContactListComponent } from './components/contact-list/contact-list.component';
+import { ContactDetailComponent } from './components/contact-detail/contact-detail.component';
+import { ContactAddEditComponent } from './components/contact-add-edit/contact-add-edit.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/contacts', pathMatch: 'full' },

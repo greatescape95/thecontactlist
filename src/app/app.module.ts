@@ -1,23 +1,22 @@
-
-
 import { BrowserModule } from '@angular/platform-browser';
+import { AppRoutingModule } from './/app-routing.module';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-import { FilterPipe} from './filter.pipe';
-
+import { StorageServiceModule } from 'angular-webstorage-service';
 
 import { AppComponent } from './app.component';
-import { ContactListComponent } from './contact-list/contact-list.component';
-import { ContactDetailComponent } from './contact-detail/contact-detail.component';
-import { AppRoutingModule } from './/app-routing.module';
-import { StorageServiceModule} from 'angular-webstorage-service';
-import { LocalStorageService } from './local-storage.service';
-import { UtilityService} from './utility.service';
-import { ContactAddEditComponent } from './contact-add-edit/contact-add-edit.component';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ContactListComponent } from './components/contact-list/contact-list.component';
+import { ContactDetailComponent } from './components/contact-detail/contact-detail.component';
+import { ContactAddEditComponent } from './components/contact-add-edit/contact-add-edit.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+
+
+import { LocalStorageService } from './services/local-storage.service';
+import { UtilityService } from './services/utility.service';
+
+import { FilterPipe } from './filters/search-filter.pipe';
 
 @NgModule({
   declarations: [

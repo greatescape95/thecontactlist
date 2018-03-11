@@ -27,7 +27,7 @@
         </div>
       </div>
 
-      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pd-0" *ngFor="let contact of contacts | filter : searchText" [hidden]="selectedTabIndex === 1 && !contact.isFavorite">
+      <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 pd-0" *ngFor="let contact of contacts | searchFilter : searchText" [hidden]="selectedTabIndex === 1 && !contact.isFavorite">
         <div class="contact-item-container">
           <div class="item-icons-container">
             <div class="fll">

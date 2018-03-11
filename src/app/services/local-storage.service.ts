@@ -2,7 +2,7 @@ import { LOCAL_STORAGE, WebStorageService, StorageService } from 'angular-websto
 import { Inject, Injectable } from '@angular/core';
 
 import { MatDialog, MatDialogRef } from '@angular/material';
-import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from './../components/confirm-dialog/confirm-dialog.component';
 
 @Injectable()
 export class LocalStorageService {
