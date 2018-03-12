@@ -4,6 +4,7 @@
 @color-brand: #43a0b0;
 @color-text: #C0C0C0;
 @color-faded: #e0e0e0;
+@color-warning: red;
 //general
 html,
 body {
@@ -27,6 +28,12 @@ a {
 a:hover {
     color: @color-brand;
     text-decoration: inherit;
+}
+
+.input-validation-error {
+    span {
+        color: @color-warning;
+    }
 }
 
 //helpers

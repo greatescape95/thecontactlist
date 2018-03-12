@@ -51,7 +51,12 @@
                       <strong>email*</strong>
                     </span>
                   </div>
-                  <input class="form-control" [(ngModel)]="contact.email" #email="ngModel" type="email" id="email" name="email" required>
+                  <input class="form-control" [(ngModel)]="contact.email" #email="ngModel" type="email" id="email" name="email" required pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$">
+                  <div class="input-validation-error" [hidden]="email.valid || email.untouched">
+                    <span *ngIf="email.errors && email.errors.pattern">
+                      Email is invalid!
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -71,12 +76,11 @@
                   <input class="form-control" [(ngModel)]="phone.number" name="number-{{i}}" type="text" required placeholder="number(required)">
                 </div>
                 <div class="col-10 col-sm-5 fll pb_20">
-                  <input class="form-control" [(ngModel)]="phone.label" name="label-{{i}}" type="text" placeholder="label*">
+                  <input class="form-control" [(ngModel)]="phone.label" name="label-{{i}}" type="text" placeholder="label">
                 </div>
                 <div class="col-2 col-sm-1 fll pb_20 pull-right">
                   <i class="fa fa-times-circle icon-remove" (click)="removePhone(i)"></i>
                 </div>
-                <!-- <app-show-errors [control]="phone"></app-show-errors> -->
               </div>
             </div>
 
