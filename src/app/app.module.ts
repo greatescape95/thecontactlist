@@ -6,6 +6,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StorageServiceModule } from 'angular-webstorage-service';
 
+import { PathLocationStrategy, LocationStrategy } from '@angular/common';
+
 import { AppComponent } from './app.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
 import { ContactDetailComponent } from './components/contact-detail/contact-detail.component';
@@ -38,7 +40,8 @@ import { FilterPipe } from './filters/search-filter.pipe';
   entryComponents: [ConfirmDialogComponent],
   providers: [
     LocalStorageService,
-    UtilityService
+    UtilityService,
+    { provide: LocationStrategy, useClass: PathLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })
