@@ -6,7 +6,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StorageServiceModule } from 'angular-webstorage-service';
 
-import { PathLocationStrategy, LocationStrategy } from '@angular/common';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
@@ -41,7 +41,7 @@ import { FilterPipe } from './filters/search-filter.pipe';
   providers: [
     LocalStorageService,
     UtilityService,
-    { provide: LocationStrategy, useClass: PathLocationStrategy }
+    { provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })
